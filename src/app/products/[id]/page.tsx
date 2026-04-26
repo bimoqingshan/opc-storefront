@@ -9,7 +9,7 @@ import { useCart } from '@/lib/cart';
 
 export default function ProductDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
-  const product = useMemo(() => products.find(p => p.id === parseInt(id)), [id]);
+  const product = useMemo(() => products.find(p => p.id === id), [id]);
   const { addItem } = useCart();
   const [selectedSize, setSelectedSize] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
