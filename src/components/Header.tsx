@@ -1,12 +1,14 @@
-"use client";
+'use client';
 
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { useTheme } from "@/lib/theme";
+import { ShoppingCart, Menu, X, Sun, Moon } from "lucide-react";
 import { useState } from "react";
 
 export default function Header() {
   const { totalItems } = useCart();
+  const { theme, toggleTheme } = useTheme();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
@@ -34,8 +36,17 @@ export default function Header() {
             </Link>
           </div>
 
-          {/* Cart & Mobile Menu */}
-          <div className="flex items-center gap-4">
+          {/* Cart & Theme Toggle & Mobile Menu */}
+          <div className="flex items-center gap-2">
+            {/* Theme Toggle */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white rounded-lg hover:bg-gray-100 dark:hover:bg-zinc-800 transition"
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+            </button>
+
             {/* Cart */}
             <Link href="/cart" className="relative p-2 text-zinc-700 dark:text-zinc-300 hover:text-black dark:hover:text-white">
               <ShoppingCart size={24} />
